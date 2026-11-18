@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "customer-intelligence"
+version = "0.1.0"
+description = "Camada analítica B2B determinística, exclusivamente sintética"
+requires-python = ">=3.12"
+dependencies = ["polars>=1.30,<2", "duckdb>=1.3,<2", "pyarrow>=18,<24", "pydantic>=2.10,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "httpx>=0.27,<1"]
+api = ["fastapi>=0.139,<1", "uvicorn>=0.30,<1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+customer_intelligence = ["sql/*.sql"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
